@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: api-gateway
+
+server:  port: 5000
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka
+
+zuul:
+  routes:
+    auth-ms:
+      url: http://${LOAN_HOST:localhost}:8084
+    account-service:
+      url: http://localhost:8081
+    customer-service:
+      url: http://localhost:8080
+    transaction-service:
+      url: http://localhost:8500
+    rules:
+      url: http://localhost:8090
+
+ribbon:
+  eureka:
+    enabled: false
